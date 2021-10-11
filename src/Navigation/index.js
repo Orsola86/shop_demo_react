@@ -1,8 +1,9 @@
 import React from "react";
 import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
 import { Typography, Badge, Container, Grid } from "@mui/material";
+import { CLOSE_BAKET } from "../actions";
 
-export default function Navigation() {
+export default function Navigation({ dispatch }) {
   return (
     <Container fixed sx={{ mt: 4 }}>
       <Grid container spacing={2}>
@@ -10,19 +11,19 @@ export default function Navigation() {
           item
           xs={4}
           sx={{ display: "flex", cursor: "pointer" }}
-          onClick={() => console.log("test")}
+          onClick={() => dispatch({ type: CLOSE_BAKET })}
         >
           <Typography
-            variant='button'
-            display='block'
-            component='h6'
-            color='primary'
+            variant="button"
+            display="block"
+            component="h6"
+            color="primary"
             sx={{ mr: 1 }}
           >
             Basket
           </Typography>
-          <Badge badgeContent={0} color='primary'>
-            <ShoppingCartTwoToneIcon color='action' />
+          <Badge badgeContent={0} color="primary">
+            <ShoppingCartTwoToneIcon color="action" />
           </Badge>
         </Grid>
       </Grid>
