@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
 import { Typography, Badge, Container, Grid } from "@mui/material";
-import { CLOSE_BAKET } from "../actions";
+import { TOGGLE_BASKET } from "../actions";
+import { AppContext } from "../App";
 
-export default function Navigation({ dispatch }) {
+export default function Navigation({}) {
+  const [, dispatch] = useContext(AppContext);
+
   return (
     <Container fixed sx={{ mt: 4 }}>
       <Grid container spacing={2}>
@@ -11,7 +14,7 @@ export default function Navigation({ dispatch }) {
           item
           xs={4}
           sx={{ display: "flex", cursor: "pointer" }}
-          onClick={() => dispatch({ type: CLOSE_BAKET })}
+          onClick={() => dispatch({ type: TOGGLE_BASKET })}
         >
           <Typography
             variant="button"

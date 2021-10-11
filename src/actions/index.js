@@ -1,1 +1,1 @@
-export const CLOSE_BAKET = "CLOSE_BASKET";
+export const TOGGLE_BASKET = "TOGGLE_BAKET";
