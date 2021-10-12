@@ -2,7 +2,7 @@ import { useReducer, createContext } from "react";
 import Basket from "./Basket";
 import Books from "./Books";
 import books from "./mocks/books";
-import { TOGGLE_BASKET } from "./actions";
+import { SELECTED_FILTER, TOGGLE_BASKET } from "./actions";
 import Navigation from "./Navigation";
 
 const INITIAL_STATE = {
@@ -17,8 +17,8 @@ const INITIAL_STATE = {
     category: "All",
   },
   books: {
-    books,
     categories: ["All", "Design", "Mobile", "Ux", "DevOps", "Essentials"],
+    filteredBooks: books,
   },
 };
 
@@ -28,6 +28,18 @@ function reducer(state, action) {
       return {
         ...state,
         basket: { ...state.basket, opened: !state.basket.opened },
+      };
+    case SELECTED_FILTER:
+      return {
+        ...state,
+        filters: { ...state.filters, category: action.payload },
+        books: {
+          ...state.books,
+          filteredBooks:
+            action.payload === "All"
+              ? books
+              : books.filter((book) => book.category === action.payload),
+        },
       };
 
     default:
