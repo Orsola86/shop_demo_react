@@ -16,7 +16,7 @@ import { AppContext } from "../App";
 
 export default function Basket() {
   const [state, dispatch] = useContext(AppContext);
-  const { opened } = state;
+  const { opened } = state.basket;
 
   return (
     <Box
