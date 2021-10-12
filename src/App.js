@@ -2,7 +2,7 @@ import { useReducer, createContext } from "react";
 import Basket from "./Basket";
 import Books from "./Books";
 import books from "./mocks/books";
-import { SELECTED_FILTER, TOGGLE_BASKET } from "./actions";
+import { SELECTED_FILTER, TOGGLE_BASKET, SEARCH_BOOK } from "./actions";
 import Navigation from "./Navigation";
 
 const INITIAL_STATE = {
@@ -39,6 +39,17 @@ function reducer(state, action) {
             action.payload === "All"
               ? books
               : books.filter((book) => book.category === action.payload),
+        },
+      };
+    case SEARCH_BOOK:
+      return {
+        ...state,
+        filters: { ...state.filters, word: action.payload },
+        books: {
+          ...state.books,
+          filteredBooks: books.filter((book) =>
+            book.title.toUpperCase().includes(action.payload.toUpperCase())
+          ),
         },
       };
 

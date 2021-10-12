@@ -10,9 +10,7 @@ export default function Books() {
 
   return (
     <Container fixed sx={{ mt: 4 }}>
-      <Filters
-      //selectedFilter={selectedFilter} selectFilter={selectFilter}
-      />
+      <Filters />
       <Grid container spacing={2}>
         {filteredBooks?.map((book) => (
           <Book key={book.id} {...book} />

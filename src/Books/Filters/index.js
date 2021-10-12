@@ -6,6 +6,8 @@ import { SELECTED_FILTER } from "../../actions";
 
 export default function Filters() {
   const [state, dispatch] = useContext(AppContext);
+  const { categories } = state.books;
+  const { category } = state.filters;
 
   return (
     <>
@@ -13,13 +15,13 @@ export default function Filters() {
         <SearchBar />
       </Stack>
       <Stack direction="row" spacing={2} sx={{ my: 5 }}>
-        {state.books.categories?.map((filter) => (
+        {categories?.map((filter) => (
           <Chip
             key={filter}
             label={filter}
-            color={state.filters.category === filter ? "secondary" : "primary"}
+            color={category === filter ? "secondary" : "primary"}
             onClick={() => dispatch({ type: SELECTED_FILTER, payload: filter })}
-            variant={state.filters.category === filter ? "filled" : "outlined"}
+            variant={category === filter ? "filled" : "outlined"}
           />
         ))}
       </Stack>
