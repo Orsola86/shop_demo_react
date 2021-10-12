@@ -21,7 +21,10 @@ export default function SearchBar() {
         onChange={(event) =>
           dispatch({
             type: SEARCH_BOOK,
-            payload: event.target.value,
+            payload: {
+              filter: state.filters.category,
+              word: event.target.value,
+            },
           })
         }
       />

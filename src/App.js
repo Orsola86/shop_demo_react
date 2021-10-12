@@ -30,28 +30,45 @@ function reducer(state, action) {
         basket: { ...state.basket, opened: !state.basket.opened },
       };
     case SELECTED_FILTER:
+    case SEARCH_BOOK:
+      console.log(action.payload);
       return {
         ...state,
-        filters: { ...state.filters, category: action.payload },
+        filters: {
+          ...state.filters,
+          category: action.payload.filter,
+          word: action.payload.word,
+        },
         books: {
           ...state.books,
           filteredBooks:
-            action.payload === "All"
-              ? books
-              : books.filter((book) => book.category === action.payload),
+            action.payload.filter === "All"
+              ? books.filter((book) =>
+                  book.title
+                    .toLowerCase()
+                    .includes(action.payload.word.toLowerCase())
+                )
+              : books.filter(
+                  (book) =>
+                    book.category === action.payload.filter &&
+                    book.title
+                      .toLowerCase()
+                      .includes(action.payload.word.toLowerCase())
+                ),
         },
       };
-    case SEARCH_BOOK:
-      return {
-        ...state,
-        filters: { ...state.filters, word: action.payload },
-        books: {
-          ...state.books,
-          filteredBooks: books.filter((book) =>
-            book.title.toUpperCase().includes(action.payload.toUpperCase())
-          ),
-        },
-      };
+
+    // case SEARCH_BOOK:
+    //   return {
+    //     ...state,
+    //     filters: { ...state.filters, word: action.payload },
+    //     books: {
+    //       ...state.books,
+    //       filteredBooks: books.filter((book) =>
+    //         book.title.toUpperCase().includes(action.payload.toUpperCase())
+    //       ),
+    //     },
+    //   };
 
     default:
       return state;
